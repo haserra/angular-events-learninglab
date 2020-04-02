@@ -1,0 +1,88 @@
+<div class="well hoverwell thumbnail">
+    <h2>{{ event?.name }}</h2>
+    <div>Date: {{ event?.date }}</div>
+    <!-- class bindings are similar to property binding -->
+    <!-- <div [class.green]="event?.time === '8:00 am'" [ngSwitch]="event?.time">
+        Time: {{ event?.time }}
+        <span *ngSwitchCase="'8:00 am'">(Early Start)</span>
+        <span *ngSwitchCase="'10:00 am'">(Late Start)</span>
+        <span *ngSwitchDefault>(Normal Start)</span>
+    </div> -->
+    <!-- ngClass directive is going to inspect/ evaluate an object with the following properties -->
+    <!--     <div [ngClass]="{green: event?.time === '8:00 am', bold: event?.time === '8:00 am'}" [ngSwitch]="event?.time">
+        Time: {{ event?.time }}
+        <span *ngSwitchCase="'8:00 am'">(Early Start)</span>
+        <span *ngSwitchCase="'10:00 am'">(Late Start)</span>
+        <span *ngSwitchDefault>(Normal Start)</span>
+    </div> -->
+
+    <!-- ngClass directive is going to inspect/ evaluate an object with the following properties 
+        let's replace the expression with a function instead-->
+    <div [ngClass]="_getStartTimeClass()" [ngSwitch]="event?.time">
+        Time: {{ event?.time }}
+        <span *ngSwitchCase="'8:00 am'">(Early Start)</span>
+        <span *ngSwitchCase="'10:00 am'">(Late Start)</span>
+        <span *ngSwitchDefault>(Normal Start)</span>
+    </div>
+
+    <!-- applying style binding in a way similar ... -->
+    <div [style.color]="event?.time === '8:00 am'  ? '#003300' : '#bbb'" [ngSwitch]="event?.time">
+        Time: {{ event?.time }}
+        <span *ngSwitchCase="'8:00 am'">(Early Start)</span>
+        <span *ngSwitchCase="'10:00 am'">(Late Start)</span>
+        <span *ngSwitchDefault>(Normal Start)</span>
+    </div>
+
+    <!-- applying ngStyle binding in a way similar ... returns an object or a string or an array -->
+    <div style="color: azure;"
+        [ngStyle]="{'color': event?.time === '8:00 am' ? '#003300' : '#bbb', 'font-weight': event?.time === '8:00 am' ? 'bold' : 'normal'}"
+        [ngSwitch]="event?.time">
+        Time: {{ event?.time }}
+        <span *ngSwitchCase="'8:00 am'">(Early Start)</span>
+        <span *ngSwitchCase="'10:00 am'">(Late Start)</span>
+        <span *ngSwitchDefault>(Normal Start)</span>
+    </div>
+
+    <!-- applying ngStyle binding in a way similar ... evaluates the result of the class method  -->
+    <div [ngStyle]="getStartTimeStyle()" [ngSwitch]="event?.time">
+        Time: {{ event?.time }}
+        <span *ngSwitchCase="'8:00 am'">(Early Start)</span>
+        <span *ngSwitchCase="'10:00 am'">(Late Start)</span>
+        <span *ngSwitchDefault>(Normal Start)</span>
+    </div>
+
+
+    <!-- <div [ngSwitch]="event?.time">
+        <span *ngSwitchCase="'8:00 am'">Early Start</span>
+        <span *ngSwitchCase="'10:00 am'">Late Start</span>
+        <span *ngSwitchDefault>Normal Start</span>
+    </div> -->
+
+    <div>Price: \${{ event.price }}</div>
+    <!-- Using ngIf we can remove the elements from the DOM completely, not only hidden them -->
+    <div *ngIf="event?.location">
+        <span>Location: {{ event?.location.address }}</span>
+        <span>&nbsp;</span>
+        <span>{{ event?.location.city }}, {{ event?.location.country }}</span>
+    </div>
+    <div *ngIf="event?.onlineUrl">
+        Online URL: {{event?.onlineUrl}}
+    </div>
+
+    <!-- alternatvely we can bind an expresion to the hidden property of the HTML , like this-->
+    <!-- property biding-->
+    <!-- 
+        <div [hidden]="!event?.location">
+        <span>Location: {{ event?.location.address }}</span>
+        <span>&nbsp;</span>
+        <span>{{ event?.location.city }}, {{ event?.location.country }}</span>
+    </div>
+    <div [hidden]="!event?.onlineUrl">
+        Online URL: {{event?.onlineUrl}}
+    </div> -->
+
+    <button class="btn btn-primary" (click)="handleClickMe()">
+        Click Me!
+    </button>
+
+</div>
